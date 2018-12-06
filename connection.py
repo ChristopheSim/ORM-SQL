@@ -1,11 +1,10 @@
-import utils
 from sqlalchemy import create_engine
-from utils.py import utils
+import utils
 
 engine = utils.connect()
 
 connection = engine.connect()
-result = connection.execute("select * from Movie")
+result = connection.execute("select * from movie")
 
 for row in result:
     print("Title:", row['Title'])
