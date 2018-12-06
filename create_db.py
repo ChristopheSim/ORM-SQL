@@ -5,29 +5,18 @@
 """ This script creates the mysql database. """
 
 
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Author: Maxime Bourguignon and Christophe Simon
 
+import utils
 from sqlalchemy import create_engine
 from sqlalchemy import MetaData, Table, Column, ForeignKey
 from sqlalchemy import Integer, String, Date
-from utils import get
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.orm import relationship
 
-
-
-
-username = get("db", "login")
-password = get("db", "password")
-port = get("db", "port")
-database = get("db", "name")
-url = get("db", "url")
-
-engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
-                                                        password,
-                                                        url,
-                                                        port,
-                                                        database),
-                       echo=True)
+engine = utils.connect()
 
 # Check the existence of database
 if not database_exists(engine.url):
