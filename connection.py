@@ -1,22 +1,10 @@
 from sqlalchemy import create_engine
-from utils.py import utils
+import utils
 
-username = get("db", "login") 
-password = get("db", "password")
-port = get("db", "port")
-database = get("db", "name")
-url = get("db", "url")
-
-
-engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
-                                                        password,
-                                                        url,
-                                                        port,
-                                                        database),
-                       echo=True)
+engine = utils.connect()
 
 connection = engine.connect()
-result = connection.execute("select * from Movie")
+result = connection.execute("select * from movie")
 
 for row in result:
     print("Title:", row['Title'])

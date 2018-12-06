@@ -5,8 +5,7 @@
 """ This script contains the useful functions. """
 
 import yaml
-
-
+from sqlalchemy import create_engine
 
 def get(section, parameter):
     try:
@@ -15,3 +14,18 @@ def get(section, parameter):
         return config[section][parameter]
     except KeyError:
         return "{} introuvable dans {}".format(parametre, section)
+
+def connect():
+    username = get("db", "login")
+    password = get("db", "password")
+    port = get("db", "port")
+    database = get("db", "name")
+    url = get("db", "url")
+
+    engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
+                                                            password,
+                                                            url,
+                                                            port,
+                                                            database),
+                            echo=True)
+    return engine

@@ -1,21 +1,14 @@
-from sqlakchemy_utils import functions
-from utils import get
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Author: Maxime Bourguignon and Christophe Simon
 
-username = get("db", "login")
-password = get("db", "password")
-port = get("db", "port")
-database = get("db", "name")
-url = get("db", "url")
-
-engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
-                                                        password,
-                                                        url,
-                                                        port,
-                                                        database),
-                        echo=True)
-
-if functions.database_exists(engine.database):
-    drop_database(engine.database)
+import utils
+from sqlalchemy_utils import functions
 
 if __name__ == "__main__":
-    print("Drop db")
+    engine = utils.connect()
+
+    if functions.database_exists(engine.url):
+        functions.drop_database(engine.url)
+
+    print("db dropped")
