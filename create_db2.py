@@ -5,31 +5,18 @@
 """ This script creates the mysql database. """
 
 
-
-from sqlalchemy import create_engine
-from sqlalchemy import MetaData, Table, Column, ForeignKey, inspect
+import utils
+from sqlalchemy import Column, ForeignKey, inspect
 from sqlalchemy import Integer, String, Date
-from utils import get
-from sqlalchemy_utils import database_exists, create_database
-from sqlalchemy.orm import relationship, mapper
+from sqlalchemy_utils import database_exists
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 
 
 Base = declarative_base()
 
-username = get("db", "login")
-password = get("db", "password")
-port = get("db", "port")
-database = get("db", "name")
-url = get("db", "url")
-
-engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
-                                                        password,
-                                                        url,
-                                                        port,
-                                                        database),
-                       echo=True)
+engine = utils.connect()
 
 # Check the existence of database
 if not database_exists(engine.url):
@@ -37,7 +24,7 @@ if not database_exists(engine.url):
 else:
     print("The database already exists.")
 
-# Declare tables
+# Declare tables (classes)
 class Person(Base):
     __tablename__ = 'person'
 
