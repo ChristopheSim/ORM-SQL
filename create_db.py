@@ -1,14 +1,17 @@
 from sqlalchemy import create_engine
+from utils import get
 
-username = "chris"
-password = "root"
-port = 3306
-database = "movies"
+username = get("db", "login")
+password = get("db", "password")
+port = get("db", "port")
+database = get("db", "name")
+url = get("db", "url")
 
-engine = create_engine('mysql://{}:{}@localhost:{}/{}'.format(username,
-                                                              password,
-                                                              port,
-                                                              database),
+engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
+                                                        password,
+                                                        url,
+                                                        port,
+                                                        database),
                        echo=True)
 
 connection = engine.connect()
