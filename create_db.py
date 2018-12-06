@@ -2,12 +2,8 @@
 # -*- coding: utf-8 -*-
 # Author: Maxime Bourguignon and Christophe Simon
 
-""" This script creates the mysql database. """
+""" This script creates the mysql database (deprecated). """
 
-
-# !/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# Author: Maxime Bourguignon and Christophe Simon
 
 import utils
 from sqlalchemy import create_engine
