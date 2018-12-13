@@ -5,7 +5,7 @@
 """ This script contains the useful functions. """
 
 import yaml
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData, Table
 
 def get(section, parameter):
     try:
@@ -29,3 +29,11 @@ def connect():
                                                             database),
                             echo=True)
     return engine
+
+def table(str):
+    engine = connect()
+
+    meta = MetaData(engine)
+    table = Table(str, meta, autoload=True)
+
+    return table
