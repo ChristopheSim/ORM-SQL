@@ -51,7 +51,7 @@ class Movie(Base):
     pk_movie = Column(Integer, primary_key=True, nullable=False,
     autoincrement=True)
     date = Column(Date, nullable=False)
-    time = Column(Integer, nullable=False, autoincrement=False)
+    duration = Column(Integer, nullable=False, autoincrement=False)
     title = Column(String(30), nullable=False)
     links = relationship("Link", back_populates="movie")
 
