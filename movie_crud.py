@@ -1,5 +1,6 @@
 from utils import connect, table
 from sqlalchemy import MetaData, Table, select
+from crud import search
 
 def insert_movie(title, duration, date):
     try:
@@ -26,16 +27,6 @@ conn.execute(movie.insert(),[
    {'date':date(2018, 12, 11),'time':120, 'title':'Test2'},
    {'date':date(2018, 12, 11),'time':120, 'title':'Test3'}])
  """
-
-def search(query):
-    try:
-        engine = connect()
-
-        result = engine.execute(query)
-        return result.fetchall()
-
-    except:
-        print("An error occured during the search of a movie.")
 
 def search_movie(title, duration, name):
 
