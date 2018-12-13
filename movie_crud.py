@@ -35,11 +35,10 @@ def search_movie(title, duration, date):
     select = '*'
     table = 'movie'
     filter = "title = {} and duration = {} and date = {}".format(title, duration, date)
-    query = "select {} from {} where {}".format(select, table, filter)
-    #query = "select {} from {}".format(select, table)
-    #query = select([movie]).where(sqlalchemy.and(movie.columns.title == title, movie.columns.duration == duration, movie.columns.date == date))
+    #filter = "title = {} and duration = {}".format(title, duration)
+    #query = "select {} from {} where {}".format(select, table, filter) # don't work
+    query = "select {} from {}".format(select, table) # work
     print(query)
-    #filter = "title = {}, duration = {}, name = {}".format(title, duration, name)
-    #query = "select {} from {} where {}".format('*', "movie")
+
     result = search(query)
     print(result)
