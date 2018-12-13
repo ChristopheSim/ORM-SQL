@@ -1,9 +1,5 @@
 import utils
-from datetime import date
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy import Table
-from sqlalchemy import Column
-from sqlalchemy.ext.automap import automap_base
+from sqlalchemy import MetaData, Table
 
 def insert_movie(title, duration, date):
     try:
