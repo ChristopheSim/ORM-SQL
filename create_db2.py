@@ -31,7 +31,7 @@ class Person(Base):
     pk_person = Column(Integer, primary_key=True, nullable=False,
     autoincrement=True)
     firstname = Column(String(30))
-    lastnamename = Column(String(30))
+    lastname = Column(String(30))
     birthdate = Column(Date, nullable=False)
     gender = Column(String(1), nullable=False)
     links = relationship("Link", back_populates="person")
