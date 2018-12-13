@@ -1,9 +1,9 @@
-import utils
+from utils import connect
 from sqlalchemy import MetaData, Table
 
 def insert_movie(title, duration, date):
     try:
-        engine = utils.connect()
+        engine = connect()
 
         meta = MetaData(engine)
         movie = Table('movie', meta, autoload=True)
