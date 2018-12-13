@@ -31,7 +31,7 @@ class Person(Base):
     pk_person = Column(Integer, primary_key=True, nullable=False,
     autoincrement=True)
     firstname = Column(String(30))
-    lastnamename = Column(String(30))
+    lastname = Column(String(30))
     birthdate = Column(Date, nullable=False)
     gender = Column(String(1), nullable=False)
     links = relationship("Link", back_populates="person")
@@ -77,3 +77,7 @@ Base.metadata.create_all(bind=engine)
 ins = inspect(engine)
 for _t in ins.get_table_names():
     print(_t)
+if ins.get_table_names() != None:
+    print("The database was successfully created.")
+else:
+    print("ERROR: the database was not successfully created.")

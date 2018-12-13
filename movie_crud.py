@@ -1,4 +1,4 @@
-from utils import table
+from utils import connect, table
 from sqlalchemy import MetaData, Table, select
 
 def insert_movie(title, duration, date):
@@ -15,9 +15,11 @@ def insert_movie(title, duration, date):
 
         conn = engine.connect()
         conn.execute(ins)
+        print("The movie was successfully inserted.")
 
     except:
-        print("An error occured during the insertion of a movie.")
+        print("ERROR: the movie was not successfully inserted.")
+
 """
 # insert multiple data
 conn.execute(movie.insert(),[
@@ -30,7 +32,7 @@ def search(query):
         engine = connect()
 
         result = engine.execute(query)
-        return result
+        return result.fetchall()
 
     except:
         print("An error occured during the search of a movie.")
