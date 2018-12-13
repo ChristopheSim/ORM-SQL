@@ -28,11 +28,16 @@ conn.execute(movie.insert(),[
    {'date':date(2018, 12, 11),'time':120, 'title':'Test3'}])
  """
 
-def search_movie(title, duration, name):
+def search_movie(title, duration, date):
 
-    movie = table('movie')
+    #movie = table('movie')
 
-    query = select([movie])
+    select = '*'
+    table = 'movie'
+    filter = "title = {} and duration = {} and date = {}".format(title, duration, date)
+    query = "select {} from {} where {}".format(select, table, filter)
+    #query = "select {} from {}".format(select, table)
+    #query = select([movie]).where(sqlalchemy.and(movie.columns.title == title, movie.columns.duration == duration, movie.columns.date == date))
     print(query)
     #filter = "title = {}, duration = {}, name = {}".format(title, duration, name)
     #query = "select {} from {} where {}".format('*', "movie")
