@@ -77,3 +77,7 @@ Base.metadata.create_all(bind=engine)
 ins = inspect(engine)
 for _t in ins.get_table_names():
     print(_t)
+if ins.get_table_names() != None:
+    print("The database was successfully created.")
+else:
+    print("ERROR: the database was not successfully created.")
