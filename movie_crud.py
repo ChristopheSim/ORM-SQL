@@ -15,9 +15,11 @@ def insert_movie(title, duration, date):
 
         conn = engine.connect()
         conn.execute(ins)
+        print("The movie was successfully inserted.")
 
     except:
-        print("An error occured during the insertion of a movie.")
+        print("ERROR: the movie was not successfully inserted.")
+
 """
 # insert multiple data
 conn.execute(movie.insert(),[
