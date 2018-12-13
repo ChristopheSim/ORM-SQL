@@ -28,7 +28,6 @@ conn.execute(movie.insert(),[
    {'date':date(2018, 12, 11),'time':120, 'title':'Test3'}])
  """
 
-
 def search_movie(title, duration, name):
 
     movie = table('movie')
