@@ -43,3 +43,22 @@ def search_link(fk_movie, fk_person, fk_role):
             print((r.pk_link, r.fk_movie, r.fk_person, r.fk_role))
     except:
         print("ERROR: no link found.")
+
+def update_link(id, fk_movie, fk_person, fk_role):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Link).filter(Link.pk_link == id).\
+        update({"fk_movie": fk_movie, "fk_person": fk_person,
+        "fk_role": fk_role}, synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The link was successfully updated.")
+        else:
+            print("The link was not successfully updated.")
+    except:
+        print("ERROR: no link updated.")
