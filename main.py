@@ -1,3 +1,7 @@
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Author: Maxime Bourguignon and Christophe Simon
+
 import os
 
 help = """Please select what you would like to do:

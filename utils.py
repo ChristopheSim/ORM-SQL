@@ -16,19 +16,22 @@ def get(section, parameter):
         return "{} introuvable dans {}".format(parametre, section)
 
 def connect():
-    username = get("db", "login")
-    password = get("db", "password")
-    port = get("db", "port")
-    database = get("db", "name")
-    url = get("db", "url")
+    try:
+        username = get("db", "login")
+        password = get("db", "password")
+        port = get("db", "port")
+        database = get("db", "name")
+        url = get("db", "url")
 
-    engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
-                                                            password,
-                                                            url,
-                                                            port,
-                                                            database),
-                            echo=True)
-    return engine
+        engine = create_engine('mysql://{}:{}@{}:{}/{}'.format(username,
+                                                                password,
+                                                                url,
+                                                                port,
+                                                                database),
+                                echo=True)
+        return engine
+    except:
+        print("ERROR: no connection to the database.")
 
 def table(str):
     engine = connect()

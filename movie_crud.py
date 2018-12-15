@@ -1,3 +1,7 @@
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Author: Maxime Bourguignon and Christophe Simon
+
 from utils import connect, table
 from sqlalchemy import MetaData, Table, select
 from sqlalchemy.orm import sessionmaker
@@ -33,15 +37,17 @@ conn.execute(movie.insert(),[
  """
 
 def search_movie(title, duration, date):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
 
-    engine = connect()
-    Base.metadata.bind = engine
-    DBSession = sessionmaker()
-    DBSession.bind = engine
-    session = DBSession()
-
-    result = session.query(Movie).filter(Movie.title == title).filter(Movie.duration == duration).filter(Movie.date == date).all()
-    print(result)
-    print(len(result))
-    for r in result:
-        print((r.pk_movie, r.title, r.duration, r.date))
+        result = session.query(Movie).filter(Movie.title == title).filter(Movie.duration == duration).filter(Movie.date == date).all()
+        print(result)
+        print(len(result))
+        for r in result:
+            print((r.pk_movie, r.title, r.duration, r.date))
+    except:
+        print("ERROR: no movie found.")

@@ -5,12 +5,15 @@
 import utils
 from sqlalchemy_utils import functions
 
-try:
-    if __name__ == "__main__":
-        engine = utils.connect()
+def drop_database():
+    try:
+        if __name__ == "__main__":
+            engine = utils.connect()
 
-        if functions.database_exists(engine.url):
-            functions.drop_database(engine.url)
-            print("The database was successfully dropped.")
-except:
-    print("ERROR: the database was not successfully dropped.")
+            if functions.database_exists(engine.url):
+                functions.drop_database(engine.url)
+                print("The database was successfully dropped.")
+    except:
+        print("ERROR: the database was not successfully dropped.")
+
+drop_database()

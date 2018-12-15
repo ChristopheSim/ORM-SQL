@@ -1,3 +1,7 @@
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Author: Maxime Bourguignon and Christophe Simon
+
 from utils import connect
 from sqlalchemy import MetaData, Table
 from crud import search
@@ -25,15 +29,17 @@ def insert_link(fk_movie, fk_person, fk_role):
 
 
 def search_link(fk_movie, fk_person, fk_role):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
 
-    engine = connect()
-    Base.metadata.bind = engine
-    DBSession = sessionmaker()
-    DBSession.bind = engine
-    session = DBSession()
-
-    result = session.query(Link).filter(Link.fk_movie == fk_movie).filter(Link.fk_person == fk_person).filter(Link.fk_role == fk_role).all()
-    print(result)
-    print(len(result))
-    for r in result:
-        print((r.pk_link, r.fk_movie, r.fk_person, r.fk_role))
+        result = session.query(Link).filter(Link.fk_movie == fk_movie).filter(Link.fk_person == fk_person).filter(Link.fk_role == fk_role).all()
+        print(result)
+        print(len(result))
+        for r in result:
+            print((r.pk_link, r.fk_movie, r.fk_person, r.fk_role))
+    except:
+        print("ERROR: no link found.")

@@ -1,3 +1,7 @@
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Author: Maxime Bourguignon and Christophe Simon
+
 from utils import connect
 from sqlalchemy import MetaData, Table
 from crud import search
@@ -26,15 +30,17 @@ def insert_person(firstname, lastname, birthdate, gender):
 
 
 def search_person(firstname, lastname, birthdate, gender):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
 
-    engine = connect()
-    Base.metadata.bind = engine
-    DBSession = sessionmaker()
-    DBSession.bind = engine
-    session = DBSession()
-
-    result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
-    print(result)
-    print(len(result))
-    for r in result:
-        print((r.pk_person, r.firstname, r.lastname, r.birthdate, r.gender))
+        result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
+        print(result)
+        print(len(result))
+        for r in result:
+            print((r.pk_person, r.firstname, r.lastname, r.birthdate, r.gender))
+    except:
+        print("ERROR: no person found.")
