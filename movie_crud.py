@@ -51,3 +51,23 @@ def search_movie(title, duration, date):
             print((r.pk_movie, r.title, r.duration, r.date))
     except:
         print("ERROR: no movie found.")
+
+
+def update_movie(id, title, duration, date):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Movie).filter(Movie.pk_movie == id).\
+        update({"title": title, "duration": duration,
+        "date": date}, synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The movie was successfully updated.")
+        else:
+            print("The movie was not successfully updated.")
+    except:
+        print("ERROR: no movie updated.")
