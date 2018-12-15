@@ -1,6 +1,8 @@
 from utils import connect
 from sqlalchemy import MetaData, Table
 from crud import search
+from create_db2 import Base, Person
+from sqlalchemy.orm import sessionmaker
 
 def insert_person(firstname, lastname, birthdate, gender):
     try:
@@ -22,14 +24,17 @@ def insert_person(firstname, lastname, birthdate, gender):
     except:
         print("ERROR: the person was not successfully inserted.")
 
+
 def search_person(firstname, lastname, birthdate, gender):
 
-    select = '*'
-    table = 'person'
-    filter = "firstname = {} and lastname = {} and birthdate = {} and gender = {}".format(firstname, lastname, birthdate, gender)
-    query = "select {} from {} where {}".format(select, table, filter)
+    engine = connect()
+    Base.metadata.bind = engine
+    DBSession = sessionmaker()
+    DBSession.bind = engine
+    session = DBSession()
 
-    print(query)
-
-    result = search(query)
-    preint(result)
+    result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
+    print(result)
+    print(len(result))
+    for r in result:
+        print((r.pk_person, r.firstname, r.lastname, r.birthdate, r.gender))

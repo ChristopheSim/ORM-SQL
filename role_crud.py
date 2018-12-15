@@ -1,6 +1,8 @@
 from utils import connect
 from sqlalchemy import MetaData, Table
 from crud import search
+from create_db2 import Base, Role
+from sqlalchemy.orm import sessionmaker
 
 def insert_role(name):
     try:
@@ -19,14 +21,17 @@ def insert_role(name):
     except:
         print("ERROR: the role was not successfully inserted.")
 
+
 def search_role(name):
 
-    select = '*'
-    table = 'role'
-    filter = "name = {}".format(name)
-    query = "select {} from {} where {}".format(select, table, filter)
+    engine = connect()
+    Base.metadata.bind = engine
+    DBSession = sessionmaker()
+    DBSession.bind = engine
+    session = DBSession()
 
-    print(query)
-
-    result = search(query)
+    result = session.query(Role).filter(Role.name == name).all()
     print(result)
+    print(len(result))
+    for r in result:
+        print((r.pk_role, r.name))

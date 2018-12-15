@@ -1,6 +1,10 @@
 from utils import connect, table
 from sqlalchemy import MetaData, Table, select
+from sqlalchemy.orm import sessionmaker
 from crud import search
+from create_db2 import Movie, Base
+
+# source : https://www.pythoncentral.io/introductory-tutorial-python-sqlalchemy/
 
 def insert_movie(title, duration, date):
     try:
@@ -30,15 +34,14 @@ conn.execute(movie.insert(),[
 
 def search_movie(title, duration, date):
 
-    #movie = table('movie')
+    engine = connect()
+    Base.metadata.bind = engine
+    DBSession = sessionmaker()
+    DBSession.bind = engine
+    session = DBSession()
 
-    select = '*'
-    table = 'movie'
-    filter = "title = {} and duration = {} and date = {}".format(title, duration, date)
-    #filter = "title = {} and duration = {}".format(title, duration)
-    #query = "select {} from {} where {}".format(select, table, filter) # don't work
-    query = "select {} from {}".format(select, table) # work
-    print(query)
-
-    result = search(query)
+    result = session.query(Movie).filter(Movie.title == title).filter(Movie.duration == duration).filter(Movie.date == date).all()
     print(result)
+    print(len(result))
+    for r in result:
+        print((r.pk_movie, r.title, r.duration, r.date))
