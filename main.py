@@ -27,6 +27,7 @@ def init():
 
 def execute(stdin):
     global state
+    # We can do swith case
     if stdin == "movies":
         # search movies
         print("search movies ...")
