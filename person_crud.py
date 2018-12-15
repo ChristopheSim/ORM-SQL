@@ -37,10 +37,34 @@ def search_person(firstname, lastname, birthdate, gender):
         DBSession.bind = engine
         session = DBSession()
 
-        result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
+        result = session.query(Person).filter(Person.firstname == firstname).\
+        filter(Person.lastname == lastname).\
+        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
+        all()
         print(result)
         print(len(result))
         for r in result:
-            print((r.pk_person, r.firstname, r.lastname, r.birthdate, r.gender))
+            print((r.pk_person, r.firstname, r.lastname, r.birthdate,
+            r.gender))
     except:
         print("ERROR: no person found.")
+
+
+def update_person(id, firstname, lastname, birthdate, gender):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Person).filter(Person.pk_person == id).\
+        update({"firstname": firstname, "lastname": lastname,
+        "birthdate": birthdate, "gender": gender}, synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The person was successfully updated.")
+        else:
+            print("The person was not successfully updated.")
+    except:
+        print("ERROR: no person updated.")
