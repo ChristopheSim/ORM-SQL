@@ -41,3 +41,22 @@ def search_role(name):
             print((r.pk_role, r.name))
     except:
         print("ERROR: no role found.")
+
+
+def update_role(id, name):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Role).filter(Role.pk_role == id).\
+        update({"name": name}, synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The role was successfully updated.")
+        else:
+            print("The role was not successfully updated.")
+    except:
+        print("ERROR: no role updated.")
