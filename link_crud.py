@@ -62,3 +62,22 @@ def update_link(id, fk_movie, fk_person, fk_role):
             print("The link was not successfully updated.")
     except:
         print("ERROR: no link updated.")
+
+
+def delete_link(id):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Link).filter(Link.pk_link == id).\
+        delete(synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The link was successfully deleted.")
+        else:
+            print("The link was not successfully deleted.")
+    except:
+        print("ERROR: no link deleted.")
