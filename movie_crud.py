@@ -71,3 +71,22 @@ def update_movie(id, title, duration, date):
             print("The movie was not successfully updated.")
     except:
         print("ERROR: no movie updated.")
+
+
+def delete_movie(id):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Movie).filter(Movie.pk_movie == id).\
+        delete(synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The movie was successfully deleted.")
+        else:
+            print("The movie was not successfully deleted.")
+    except:
+        print("ERROR: no movie deleted.")
