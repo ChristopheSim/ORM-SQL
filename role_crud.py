@@ -60,3 +60,22 @@ def update_role(id, name):
             print("The role was not successfully updated.")
     except:
         print("ERROR: no role updated.")
+
+
+def delete_role(id):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Role).filter(Role.pk_role == id).\
+        delete(synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The role was successfully deleted.")
+        else:
+            print("The role was not successfully deleted.")
+    except:
+        print("ERROR: no role deleted.")
