@@ -68,3 +68,22 @@ def update_person(id, firstname, lastname, birthdate, gender):
             print("The person was not successfully updated.")
     except:
         print("ERROR: no person updated.")
+
+
+def delete_person(id):
+    try:
+        engine = connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker()
+        DBSession.bind = engine
+        session = DBSession()
+
+        result = session.query(Person).filter(Person.pk_person == id).\
+        delete(synchronize_session=False)
+        session.commit()
+        if result is not None:
+            print("The person was successfully deleted.")
+        else:
+            print("The person was not successfully deleted.")
+    except:
+        print("ERROR: no person deleted.")
