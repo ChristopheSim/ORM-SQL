@@ -31,7 +31,7 @@ def insert_movie(title, duration, date):
 
 
 
-def search_movie(title=None, duration=None, date)=None:
+def search_movie(title=False, duration=False, date=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
