@@ -5,6 +5,7 @@
 import os
 import utils
 
+
 help = """Please select what you would like to do:
     - create: to create the database;
     - movies: to display all movies;
@@ -34,7 +35,11 @@ def execute(stdin):
     if stdin == "create":
         # create the database
         print("create database...")
-        utils.create_db()
+        try:
+            os.system('python3 create_db.py')
+        except:
+            print("Please run manually the file create_db.py")
+            execute("quit")
     elif stdin == "movies":
         # search movies
         print("search movies ...")
