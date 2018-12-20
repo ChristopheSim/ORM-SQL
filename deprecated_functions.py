@@ -1,6 +1,6 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Author: Maxime Bourguignon and Christophe Simon
+# Authors: Maxime Bourguignon and Christophe Simon
 
 import utils
 from sqlalchemy_utils import functions
