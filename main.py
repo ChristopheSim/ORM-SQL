@@ -9,6 +9,7 @@ help = """Please select what you would like to do:
     - roles: to display all roles;
     - movie: to search a movie with the name;
     - person: to search a person with firstname and lastname;
+    - drop: to drop the database;
     - help: show the help menu;
     - quit: quit the application;
     """
@@ -40,6 +41,9 @@ def execute(stdin):
     elif stdin == "person":
         # search person
         print("search person ...")
+    elif stdin == "drop":
+        # drop he database
+        print("drop database ...")
     elif stdin == "help":
         # print help
         print(help)
