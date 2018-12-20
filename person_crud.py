@@ -28,7 +28,7 @@ def insert_person(firstname, lastname, birthdate, gender):
         print("ERROR: the person was not successfully inserted.")
 
 
-def search_person(firstname, lastname, birthdate, gender):
+def search_person(firstname=False, lastname=False, birthdate=False, gender=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
@@ -36,10 +36,55 @@ def search_person(firstname, lastname, birthdate, gender):
         DBSession.bind = engine
         session = DBSession()
 
-        result = session.query(Person).filter(Person.firstname == firstname).\
+        if firstname and lastname and birthdate and gender:
+            result = session.query(Person).filter(Person.firstname == firstname).\
         filter(Person.lastname == lastname).\
         filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
         all()
+        elif firstname and lastname and birthdate:
+            result = session.query(Person).filter(Person.firstname == firstname).\
+        filter(Person.lastname == lastname).\
+        filter(Person.birthdate == birthdate).all()
+        elif firstname and lastname and gender:
+            result = session.query(Person).filter(Person.firstname == firstname).\
+        filter(Person.lastname == lastname).\
+        filter(Person.gender == gender).\
+        all()
+        elif firstname and birthdate and gender:
+            result = session.query(Person).filter(Person.firstname == firstname).\
+        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
+        all()
+        elif lastname and birthdate and gender:
+            result = session.query(Person).\
+        filter(Person.lastname == lastname).\
+        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
+        all()
+        elif firstname and lastname:
+            result = session.query(Person).filter(Person.firstname == firstname).\
+        filter(Person.lastname == lastname).all()
+        elif firstname and birthdate:
+            result = session.query(Person).filter(Person.firstname == firstname).\
+        filter(Person.birthdate == birthdate). all()
+        elif firstname and gender:
+            result = session.query(Person).filter(Person.firstname == firstname).\
+            filter(Person.gender == gender).\
+            all()
+        elif lastname and birthdate:
+            result = session.query(Person).\
+        filter(Person.lastname == lastname).\
+        filter(Person.birthdate == birthdate).all()
+        elif lastname and gender:
+            result = session.query(Person).\
+        filter(Person.lastname == lastname).\
+        filter(Person.gender == gender).\
+        all()
+        elif birthdate and gender:
+            result = session.query(Person).\
+        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
+        all()
+        else:
+            result = session.query(Person).all()
+
         print(result)
         print(len(result))
         for r in result:

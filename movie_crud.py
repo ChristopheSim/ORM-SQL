@@ -31,7 +31,7 @@ def insert_movie(title, duration, date):
 
 
 
-def search_movie(title, duration, date):
+def search_movie(title=False, duration=False, date=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
@@ -39,7 +39,16 @@ def search_movie(title, duration, date):
         DBSession.bind = engine
         session = DBSession()
 
-        result = session.query(Movie).filter(Movie.title == title).filter(Movie.duration == duration).filter(Movie.date == date).all()
+        if title and duration and date:
+            result = session.query(Movie).filter(Movie.title == title).filter(Movie.duration == duration).filter(Movie.date == date).all()
+        elif title and duration:
+            result = session.query(Movie).filter(Movie.title == title).filter(Movie.duration == duration).all()
+        elif title and date:
+            result = session.query(Movie).filter(Movie.title == title).filter(Movie.date == date).all()
+        elif duration and date:
+            result = session.query(Movie).filter(Movie.duration == duration).filter(Movie.date == date).all()
+        else:
+            result = session.query(Movie).all()
         print(result)
         print(len(result))
         for r in result:

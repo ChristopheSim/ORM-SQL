@@ -4,6 +4,8 @@
 
 import os
 import utils
+from role_crud import search_role
+from movie_crud import search_movie
 
 
 help = """Please select what you would like to do:
@@ -29,6 +31,11 @@ def init():
     print(title)
     print(help)
 
+def ask():
+    print("input string >>> ", end='')
+    stdin = input()
+    return stdin
+
 def execute(stdin):
     global state
 
@@ -46,9 +53,13 @@ def execute(stdin):
     elif stdin == "roles":
         # search roles
         print("search roles...")
+        search_role()
     elif stdin == "movie":
         # search one movie
         print("search movie ...")
+        print("title movie ?")
+        t = ask()
+        search_movie(title=t)
     elif stdin == "person":
         # search person
         print("search person ...")
@@ -71,7 +82,6 @@ def execute(stdin):
 if __name__ == "__main__":
     init()
     while state:
-        print("input string >>> ", end='')
-        stdin = input()
+        stdin = ask()
         execute(stdin)
     quit()
