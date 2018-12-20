@@ -30,7 +30,7 @@ def insert_link(fk_movie, fk_person, fk_role):
 
 
 
-def search_link(fk_movie, fk_person, fk_role):
+def search_link(fk_movie=False, fk_person=False, fk_role=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
@@ -38,7 +38,16 @@ def search_link(fk_movie, fk_person, fk_role):
         DBSession.bind = engine
         session = DBSession()
 
-        result = session.query(Link).filter(Link.fk_movie == fk_movie).filter(Link.fk_person == fk_person).filter(Link.fk_role == fk_role).all()
+        if fk_movie and fk_person and fk_role:
+            result = session.query(Link).filter(Link.fk_movie == fk_movie).filter(Link.fk_person == fk_person).filter(Link.fk_role == fk_role).all()
+        elif fk_movie and fk_person:
+            result = session.query(Link).filter(Link.fk_movie == fk_movie).filter(Link.fk_person == fk_person).all()
+        elif fk_movie and fk_role:
+            result = session.query(Link).filter(Link.fk_movie == fk_movie).filter(Link.fk_role == fk_role).all()
+        elif fk_person and fk_role:
+            result = session.query(Link).filter(Link.fk_person == fk_person).filter(Link.fk_role == fk_role).all()
+        else:
+            result = sessionquery(Link).all()
         print(result)
         print(len(result))
         for r in result:

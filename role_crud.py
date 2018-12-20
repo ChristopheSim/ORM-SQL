@@ -28,7 +28,7 @@ def insert_role(name):
 
 
 
-def search_role(name):
+def search_role(name=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
@@ -36,7 +36,10 @@ def search_role(name):
         DBSession.bind = engine
         session = DBSession()
 
-        result = session.query(Role).filter(Role.name == name).all()
+        if name:
+            result = session.query(Role).filter(Role.name == name).all()
+        else:
+            result = session.query(Role).all()
         print(result)
         print(len(result))
         for r in result:
