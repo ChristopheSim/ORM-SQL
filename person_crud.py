@@ -8,6 +8,8 @@ from crud import search
 from create_db2 import Base, Person
 from sqlalchemy.orm import sessionmaker
 
+
+
 def insert_person(firstname, lastname, birthdate, gender):
     try:
         engine = connect()
@@ -27,6 +29,7 @@ def insert_person(firstname, lastname, birthdate, gender):
 
     except:
         print("ERROR: the person was not successfully inserted.")
+
 
 
 def search_person(firstname, lastname, birthdate, gender):
@@ -50,6 +53,7 @@ def search_person(firstname, lastname, birthdate, gender):
         print("ERROR: no person found.")
 
 
+
 def update_person(id, firstname, lastname, birthdate, gender):
     try:
         engine = connect()
@@ -68,6 +72,7 @@ def update_person(id, firstname, lastname, birthdate, gender):
             print("The person was not successfully updated.")
     except:
         print("ERROR: no person updated.")
+
 
 
 def delete_person(id):

@@ -8,6 +8,8 @@ from crud import search
 from create_db2 import Base, Link
 from sqlalchemy.orm import sessionmaker
 
+
+
 def insert_link(fk_movie, fk_person, fk_role):
     try:
         engine = connect()
@@ -28,6 +30,7 @@ def insert_link(fk_movie, fk_person, fk_role):
         print("ERROR: the link was not successfully inserted.")
 
 
+
 def search_link(fk_movie, fk_person, fk_role):
     try:
         engine = connect()
@@ -43,6 +46,8 @@ def search_link(fk_movie, fk_person, fk_role):
             print((r.pk_link, r.fk_movie, r.fk_person, r.fk_role))
     except:
         print("ERROR: no link found.")
+
+
 
 def update_link(id, fk_movie, fk_person, fk_role):
     try:
@@ -62,6 +67,7 @@ def update_link(id, fk_movie, fk_person, fk_role):
             print("The link was not successfully updated.")
     except:
         print("ERROR: no link updated.")
+
 
 
 def delete_link(id):

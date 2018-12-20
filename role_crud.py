@@ -8,6 +8,8 @@ from crud import search
 from create_db2 import Base, Role
 from sqlalchemy.orm import sessionmaker
 
+
+
 def insert_role(name):
     try:
         engine = connect()
@@ -24,6 +26,7 @@ def insert_role(name):
 
     except:
         print("ERROR: the role was not successfully inserted.")
+
 
 
 def search_role(name):
@@ -43,6 +46,7 @@ def search_role(name):
         print("ERROR: no role found.")
 
 
+
 def update_role(id, name):
     try:
         engine = connect()
@@ -60,6 +64,7 @@ def update_role(id, name):
             print("The role was not successfully updated.")
     except:
         print("ERROR: no role updated.")
+
 
 
 def delete_role(id):
