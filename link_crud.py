@@ -4,7 +4,6 @@
 
 from utils import connect
 from sqlalchemy import MetaData, Table
-from crud import search
 from create_db2 import Base, Link
 from sqlalchemy.orm import sessionmaker
 

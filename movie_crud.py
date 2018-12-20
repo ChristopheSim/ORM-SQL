@@ -5,7 +5,6 @@
 from utils import connect
 from sqlalchemy import MetaData, Table, select
 from sqlalchemy.orm import sessionmaker
-from crud import search
 from create_db2 import Movie, Base
 
 
