@@ -4,5 +4,5 @@ from datetime import date
 
 insert_person("firstname", "lastname", date(2018, 12, 13), "M")
 search_person("firstname", "lastname", date(2018, 12, 13), "M")
-update_person(1, "firstname", "lastname", date(2018, 12, 15), "M")
-delete_person(4)
+#update_person(1, "firstname", "lastname", date(2018, 12, 15), "M")
+#delete_person(4)
