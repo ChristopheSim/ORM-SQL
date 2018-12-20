@@ -3,8 +3,10 @@
 # Author: Maxime Bourguignon and Christophe Simon
 
 import os
+import utils
 
 help = """Please select what you would like to do:
+    - create: to create the database;
     - movies: to display all movies;
     - roles: to display all roles;
     - movie: to search a movie with the name;
@@ -28,8 +30,12 @@ def init():
 
 def execute(stdin):
     global state
-    # We can do swith case
-    if stdin == "movies":
+
+    if stdin == "create":
+        # create the database
+        print("create database...")
+        utils.create_db()
+    elif stdin == "movies":
         # search movies
         print("search movies ...")
     elif stdin == "roles":
@@ -44,6 +50,7 @@ def execute(stdin):
     elif stdin == "drop":
         # drop he database
         print("drop database ...")
+        utils.drop_db()
     elif stdin == "help":
         # print help
         print(help)
