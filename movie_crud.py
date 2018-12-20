@@ -5,7 +5,7 @@
 from utils import connect
 from sqlalchemy import MetaData, Table, select
 from sqlalchemy.orm import sessionmaker
-from create_db2 import Movie, Base
+from create_db import Movie, Base
 
 
 

@@ -4,7 +4,7 @@
 
 from utils import connect
 from sqlalchemy import MetaData, Table
-from create_db2 import Base, Role
+from create_db import Base, Role
 from sqlalchemy.orm import sessionmaker
 
 
