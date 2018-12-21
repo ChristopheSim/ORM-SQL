@@ -102,8 +102,9 @@ def execute(stdin):
         elif stdin == "read":
             print("read")
             title = input("title :")
+            duration = input("duration :")
             date = input("date :")
-            print(search_movie(title=title, date=date))
+            print(search_movie(title=title, duration=duration, date=date))
         elif stdin == "update":
             print("update")
             pk_movie = input("pk_movie :")
