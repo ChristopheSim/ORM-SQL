@@ -2,20 +2,24 @@
 This project was created by Maxime Bourguignon and Christophe Simon.
 Tha aim is to manage a database of movies. This file contains all the usefull informations about the application, the sources and how to run it.
 
+
 ## Sources
 - Language: Python 3 ;
 - Encoding: UTF-8 ;
 - ORM: SQLAlchemy ;
 - Doc: https://docs.sqlalchemy.org/en/latest/orm/tutorial.html.
 
+
 ## Installed packages
 - python3-mysqldb ;
 - sqlalchemy ;
 - yaml.
 
+
 ## To Do
 - To create the database (at least 2 tables) ;
 - To create an app which use the created database.
+
 
 ## Informations about the application
 Several files:
@@ -37,8 +41,10 @@ This application can manage the movies database. There is a list of the availabl
 - To update a link, a movie, a person or a role ;
 - To delete a link, a movie, a person or a role.
 
+
 ## Informations about the database
 In the 'Document' repository, you can find the database diagram.
+
 
 ## How to run the application
 1. To complete the 'config.yaml' file with the required informations ;
@@ -50,6 +56,6 @@ In the 'Document' repository, you can find the database diagram.
 
 # To do before the end
 1. Tester l'application
-2. Créer un config.yaml bidon et l'ajouter au github
+2. Créer un config.yaml bidon et l'ajouter au github (retirer du .gitignore)
 3. Supprimer le fichier deprecated_functions.py
 4. Supprimer les 4 fichiers test_x_crud.py
