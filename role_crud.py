@@ -28,7 +28,7 @@ def insert_role(name):
 
 
 
-def search_role(name=False):
+def search_role(pk_role=False, name=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
@@ -38,12 +38,15 @@ def search_role(name=False):
 
         if name:
             result = session.query(Role).filter(Role.name == name).all()
+        elif pk_role:
+            result = session.query(Role).filter(Role.pk_role == pk_role).all()
         else:
             result = session.query(Role).all()
         print(result)
         print(len(result))
         for r in result:
             print((r.pk_role, r.name))
+        return result
     except:
         print("ERROR: no role found.")
 

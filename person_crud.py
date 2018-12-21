@@ -28,7 +28,7 @@ def insert_person(firstname, lastname, birthdate, gender):
         print("ERROR: the person was not successfully inserted.")
 
 
-def search_person(firstname=False, lastname=False, birthdate=False, gender=False):
+def search_person(pk_person=False, firstname=False, lastname=False, birthdate=False, gender=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
@@ -82,6 +82,16 @@ def search_person(firstname=False, lastname=False, birthdate=False, gender=False
             result = session.query(Person).\
         filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
         all()
+        elif firstname:
+            result = session.query(Person).filter(Person.firstname == firstname).all()
+        elif lastname:
+            result = session.query(Person).filter(Person.lastname == lastname).all()
+        elif birthdate:
+            result = session.query(Person).filter(Person.firstname == birthdate).all()
+        elif gender:
+            result = session.query(Person).filter(Person.gender == gender).all()
+        elif pk_role:
+            result = session.query(Person).filter(Person.pk_role == pk_role).all()
         else:
             result = session.query(Person).all()
 
@@ -90,6 +100,7 @@ def search_person(firstname=False, lastname=False, birthdate=False, gender=False
         for r in result:
             print((r.pk_person, r.firstname, r.lastname, r.birthdate,
             r.gender))
+        return result
     except:
         print("ERROR: no person found.")
 

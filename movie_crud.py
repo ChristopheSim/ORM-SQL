@@ -31,7 +31,7 @@ def insert_movie(title, duration, date):
 
 
 
-def search_movie(title=False, duration=False, date=False):
+def search_movie(pk_movie=False, title=False, duration=False, date=False):
     try:
         engine = connect()
         Base.metadata.bind = engine
@@ -47,12 +47,21 @@ def search_movie(title=False, duration=False, date=False):
             result = session.query(Movie).filter(Movie.title == title).filter(Movie.date == date).all()
         elif duration and date:
             result = session.query(Movie).filter(Movie.duration == duration).filter(Movie.date == date).all()
+        elif title:
+            result = session.query(Movie).filter(Movie.title == title).all()
+        elif duration:
+            result = session.query(Movie).filter(Movie.duration == duration).all()
+        elif date:
+            result = session.query(Movie).filter(Movie.date == date).all()
+        elif pk_movie:
+            result = session.query(Movie).filter(Movie.pk_movie == pk_movie).all()
         else:
             result = session.query(Movie).all()
         print(result)
         print(len(result))
         for r in result:
             print((r.pk_movie, r.title, r.duration, r.date))
+        return result
     except:
         print("ERROR: no movie found.")
 
