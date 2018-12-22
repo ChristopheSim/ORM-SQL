@@ -14,10 +14,10 @@ import datetime
 help = """Please select what you would like to do:
     - create: to create the database;
     - movies: to display all movies;
-    - link: to search a link;
-    - roles: to display all roles;
-    - movie: to search a movie with the name;
-    - person: to search a person with firstname and lastname;
+    - link: to search, create, update or delete a link;
+    - role: to search, create, update or delete a role;
+    - movie: to search, create, update or delete a movie;
+    - person: to search, create, update or delete a person;
     - drop: to drop the database;
     - help: show the help menu;
     - quit: quit the application;
@@ -100,10 +100,10 @@ def execute(stdin):
             pk_role = int(input("pk_role :"))
             delete_link(pk_role)
 
-    elif stdin == "roles":
+    elif stdin == "role":
         # search roles
         try:
-            print("Menu roles")
+            print("Menu role")
             print(menu_crud)
             stdin = ask()
             if stdin == "create":
