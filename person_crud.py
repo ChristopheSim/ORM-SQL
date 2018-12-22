@@ -36,70 +36,51 @@ def search_person(pk_person=False, firstname=False, lastname=False, birthdate=Fa
         DBSession.bind = engine
         session = DBSession()
 
+        print(("test", firstname, lastname, birthdate, gender))
+        if firstname:
+            print('test_firstname')
         if firstname and lastname and birthdate and gender:
-            result = session.query(Person).filter(Person.firstname == firstname).\
-        filter(Person.lastname == lastname).\
-        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
-        all()
+            print("test_parameter")
+            result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
         elif firstname and lastname and birthdate:
-            result = session.query(Person).filter(Person.firstname == firstname).\
-        filter(Person.lastname == lastname).\
-        filter(Person.birthdate == birthdate).all()
+            result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).all()
         elif firstname and lastname and gender:
-            result = session.query(Person).filter(Person.firstname == firstname).\
-        filter(Person.lastname == lastname).\
-        filter(Person.gender == gender).\
-        all()
+            result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).filter(Person.gender == gender).all()
         elif firstname and birthdate and gender:
-            result = session.query(Person).filter(Person.firstname == firstname).\
-        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
-        all()
+            result = session.query(Person).filter(Person.firstname == firstname).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
         elif lastname and birthdate and gender:
-            result = session.query(Person).\
-        filter(Person.lastname == lastname).\
-        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
-        all()
+            result = session.query(Person).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
         elif firstname and lastname:
-            result = session.query(Person).filter(Person.firstname == firstname).\
-        filter(Person.lastname == lastname).all()
+            result = session.query(Person).filter(Person.firstname == firstname).filter(Person.lastname == lastname).all()
         elif firstname and birthdate:
-            result = session.query(Person).filter(Person.firstname == firstname).\
-        filter(Person.birthdate == birthdate). all()
+            result = session.query(Person).filter(Person.firstname == firstname).filter(Person.birthdate == birthdate). all()
         elif firstname and gender:
-            result = session.query(Person).filter(Person.firstname == firstname).\
-            filter(Person.gender == gender).\
-            all()
+            result = session.query(Person).filter(Person.firstname == firstname).filter(Person.gender == gender).all()
         elif lastname and birthdate:
-            result = session.query(Person).\
-        filter(Person.lastname == lastname).\
-        filter(Person.birthdate == birthdate).all()
+            result = session.query(Person).filter(Person.lastname == lastname).filter(Person.birthdate == birthdate).all()
         elif lastname and gender:
-            result = session.query(Person).\
-        filter(Person.lastname == lastname).\
-        filter(Person.gender == gender).\
-        all()
+            result = session.query(Person).filter(Person.lastname == lastname).filter(Person.gender == gender).all()
         elif birthdate and gender:
-            result = session.query(Person).\
-        filter(Person.birthdate == birthdate).filter(Person.gender == gender).\
-        all()
+            result = session.query(Person).filter(Person.birthdate == birthdate).filter(Person.gender == gender).all()
         elif firstname:
             result = session.query(Person).filter(Person.firstname == firstname).all()
         elif lastname:
             result = session.query(Person).filter(Person.lastname == lastname).all()
         elif birthdate:
-            result = session.query(Person).filter(Person.firstname == birthdate).all()
+            result = session.query(Person).filter(Person.birthdate == birthdate).all()
         elif gender:
             result = session.query(Person).filter(Person.gender == gender).all()
-        elif pk_role:
-            result = session.query(Person).filter(Person.pk_role == pk_role).all()
+        elif pk_person:
+            result = session.query(Person).filter(Person.pk_person == pk_person).all()
         else:
+            print("test all")
             result = session.query(Person).all()
 
+        print("test2")
         print(result)
         print(len(result))
         for r in result:
-            print((r.pk_person, r.firstname, r.lastname, r.birthdate,
-            r.gender))
+            print((r.pk_person, r.firstname, r.lastname, r.birthdate, r.gender))
         return result
     except:
         print("ERROR: no person found.")

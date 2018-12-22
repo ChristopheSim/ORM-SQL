@@ -20,7 +20,7 @@ def populate():
     insert_link("1", "2", "2")
     insert_link("1", "3", "1")
     insert_link("2", "4", "1")
-    insert_link("3", "5", "2")
+    insert_link("2", "5", "2")
 
 if __name__ == "__main__":
     populate()

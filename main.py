@@ -8,8 +8,8 @@ from role_crud import search_role, insert_role, update_role, delete_role
 from movie_crud import search_movie, insert_movie, update_movie, delete_movie
 from link_crud import search_link, insert_link, update_link, delete_link
 from person_crud import search_person, insert_person, update_person, delete_person
+from fil__db import populate
 import datetime
-
 
 help = """Please select what you would like to do:
     - create: to create the database;
@@ -19,6 +19,7 @@ help = """Please select what you would like to do:
     - movie: to search, create, update or delete a movie;
     - person: to search, create, update or delete a person;
     - drop: to drop the database;
+    - fill: populate the db with examples;
     - help: show the help menu;
     - quit: quit the application;
     """
@@ -60,17 +61,16 @@ def execute(stdin):
             execute("quit")
     elif stdin == "movies":
         # search movies
-        try:
-            print("Menu movies")
-            links = search_link()
-            print(links)
-            for l in links:
-                l[0] = search_movie(fk_movie=l[0])
-                l[1] = search_person(fk_person=l[1])
-                l[2] = search_role(fk_role=l[2])
-                print(links)
-        except:
-            print("EROOR: no movie in the database.")
+        print("Menu movies")
+        links = search_link()
+        print(links)
+        for l in links:
+            l.fk_movie = search_movie(pk_movie=l.fk_movie)
+            l.fk_person = search_person(pk_person=l.fk_person)
+            l.fk_role = search_role(pk_role=l.fk_role)
+        print(links)
+        for l in links:
+            print((l.fk_movie.title, l.fk_person.firstname, l.fk_person.lastname, l.fk_role.name))
     elif stdin == "link":
         # search links
         print("Menu link")
@@ -205,6 +205,10 @@ def execute(stdin):
             pk_person = int(input("pk_person :"))
             delete_person(pk_person)
 
+    elif stdin == "fill":
+        # test the db
+        print("test database ...")
+        populate()
     elif stdin == "drop":
         # drop he database
         print("drop database ...")
