@@ -13,6 +13,7 @@ from person_crud import search_person, insert_person, update_person, delete_pers
 help = """Please select what you would like to do:
     - create: to create the database;
     - movies: to display all movies;
+    - link: to search a link;
     - roles: to display all roles;
     - movie: to search a movie with the name;
     - person: to search a person with firstname and lastname;
@@ -65,6 +66,35 @@ def execute(stdin):
             l[1] = search_person(fk_person=l[1])
             l[2] = search_role(fk_role=l[2])
         print(links)
+    elif stdin == "link":
+        # search links
+        print("Menu link")
+        print(menu_crud)
+        stdin = ask()
+        if stdin == "create":
+            print("create")
+            fk_movie = input("fk_movie :")
+            fk_person = input("fk_person :")
+            fk_role = input("fk_role :")
+            insert_role(fk_movie, fk_person, fk_role)
+        elif stdin == "read":
+            print("read")
+            fk_movie = input("fk_movie :")
+            fk_person = input("fk_person :")
+            fk_role = input("fk_role :")
+            print(search_role(fk_movie=fk_movie, fk_person=fk_person, fk_role=fk_role))
+        elif stdin == "update":
+            print("update")
+            pk_role = input("pk_role :")
+            fk_movie = input("fk_movie :")
+            fk_person = input("fk_person :")
+            fk_role = input("fk_role :")
+            print(update_role(pk_role, fk_movie, fk_person, fk_role))
+        elif stdin == "delete":
+            print("delete")
+            pk_role = input("pk_role :")
+            delete_role(pk_role)
+
     elif stdin == "roles":
         # search roles
         print("Menu roles")
