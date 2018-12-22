@@ -64,13 +64,14 @@ def execute(stdin):
         print("Menu movies")
         links = search_link()
         print(links)
+        result = []
         for l in links:
-            l.fk_movie = search_movie(pk_movie=l.fk_movie)
-            l.fk_person = search_person(pk_person=l.fk_person)
-            l.fk_role = search_role(pk_role=l.fk_role)
-        print(links)
-        for l in links:
-            print((l.fk_movie.title, l.fk_person.firstname, l.fk_person.lastname, l.fk_role.name))
+            r = []
+            r.append(search_movie(pk_movie=l.fk_movie)[0].title)
+            r.append(search_person(pk_person=l.fk_person)[0].lastname)
+            r.append(search_role(pk_role=l.fk_role)[0].name)
+            result.append(r)
+        print(result)
     elif stdin == "link":
         # search links
         print("Menu link")

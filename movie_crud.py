@@ -48,13 +48,13 @@ def search_movie(pk_movie=False, title=False, duration=False, date=False):
         elif duration and date:
             result = session.query(Movie).filter(Movie.duration == duration).filter(Movie.date == date).all()
         elif title:
-            result =session.query(Movie).filter(Movie.title == title).all
+            result =session.query(Movie).filter(Movie.title == title).all()
         elif duration:
-            result =session.query(Movie).filter(Movie.duration == duration).all
+            result =session.query(Movie).filter(Movie.duration == duration).all()
         elif date:
-            result =session.query(Movie).filter(Movie.date == date).all
+            result =session.query(Movie).filter(Movie.date == date).all()
         elif pk_movie:
-            result =session.query(Movie).filter(Movie.pk_movie == pk_movie).all
+            result =session.query(Movie).filter(Movie.pk_movie == pk_movie).all()
         else:
             result = session.query(Movie).all()
 
