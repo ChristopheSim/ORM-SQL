@@ -42,6 +42,7 @@ def search_role(pk_role=False, name=False):
             result = session.query(Role).filter(Role.pk_role == pk_role).all()
         else:
             result = session.query(Role).all()
+        
         print(result)
         print(len(result))
         for r in result:

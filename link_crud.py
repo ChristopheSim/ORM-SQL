@@ -55,7 +55,8 @@ def search_link(pk_link=False, fk_movie=False, fk_person=False, fk_role=False):
         elif pk_link:
             result = session.query(link).filter(Link.pk_link == pk_link).all()
         else:
-            result = sessionquery(Link).all()
+            result = session.query(Link).all()
+        
         print(result)
         print(len(result))
         for r in result:
