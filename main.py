@@ -8,7 +8,7 @@ from role_crud import search_role, insert_role, update_role, delete_role
 from movie_crud import search_movie, insert_movie, update_movie, delete_movie
 from link_crud import search_link, insert_link, update_link, delete_link
 from person_crud import search_person, insert_person, update_person, delete_person
-
+from test_db import populate
 
 help = """Please select what you would like to do:
     - create: to create the database;
@@ -18,6 +18,7 @@ help = """Please select what you would like to do:
     - movie: to search a movie with the name;
     - person: to search a person with firstname and lastname;
     - drop: to drop the database;
+    - test: populate the db with examples;
     - help: show the help menu;
     - quit: quit the application;
     """
@@ -180,6 +181,10 @@ def execute(stdin):
             pk_person = input("pk_person :")
             delete_person(pk_person)
 
+    elif stdin == "test":
+        # test the db
+        print("test database ...")
+        populate()
     elif stdin == "drop":
         # drop he database
         print("drop database ...")
