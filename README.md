@@ -53,8 +53,3 @@ In the 'Document' repository, you can find the database diagram.
   - Linux: Nothing to do ;
   - Windows: in the 'main.py' file, replace "os.system('python3 create_db.py')" by "os.system('python create_db.py')" or to run the create_db.py file.
 3. To run the 'main.py' file.
-
-
-# To do before the end
-1. Tester l'application
-2. Créer un config.yaml bidon et l'ajouter au github (retirer du .gitignore)
