@@ -24,7 +24,8 @@ Tha aim is to manage a database of movies. This file contains all the usefull in
 ## Informations about the application
 Several files:
 - 'config.yaml': useful informations to configure the app ;
-- 'create_db.py': to create the database
+- 'create_db.py': to create the database ;
+- 'fill_db.py': to fill the database (example) ;
 - 'link_crud.py': all the CRUD* functions for the link table ;
 - 'movie_crud.py': all the CRUD* functions for the movie table ;
 - 'person_crud.py': all the CRUD* functions for the person table ;
@@ -57,5 +58,3 @@ In the 'Document' repository, you can find the database diagram.
 # To do before the end
 1. Tester l'application
 2. Créer un config.yaml bidon et l'ajouter au github (retirer du .gitignore)
-3. Supprimer le fichier deprecated_functions.py
-4. Supprimer les 4 fichiers test_x_crud.py

@@ -8,7 +8,8 @@ from role_crud import search_role, insert_role, update_role, delete_role
 from movie_crud import search_movie, insert_movie, update_movie, delete_movie
 from link_crud import search_link, insert_link, update_link, delete_link
 from person_crud import search_person, insert_person, update_person, delete_person
-from test_db import populate
+from fil__db import populate
+import datetime
 
 help = """Please select what you would like to do:
     - create: to create the database;
@@ -18,7 +19,7 @@ help = """Please select what you would like to do:
     - movie: to search a movie with the name;
     - person: to search a person with firstname and lastname;
     - drop: to drop the database;
-    - test: populate the db with examples;
+    - fill: populate the db with examples;
     - help: show the help menu;
     - quit: quit the application;
     """
@@ -77,50 +78,53 @@ def execute(stdin):
         stdin = ask()
         if stdin == "create":
             print("create")
-            fk_movie = input("fk_movie :")
-            fk_person = input("fk_person :")
-            fk_role = input("fk_role :")
+            fk_movie = int(input("fk_movie :"))
+            fk_person = int(input("fk_person :"))
+            fk_role = int(input("fk_role :"))
             insert_link(fk_movie, fk_person, fk_role)
         elif stdin == "read":
             print("read")
-            fk_movie = input("fk_movie :")
-            fk_person = input("fk_person :")
-            fk_role = input("fk_role :")
+            fk_movie = int(input("fk_movie :"))
+            fk_person = int(input("fk_person :"))
+            fk_role = int(input("fk_role :"))
             print(search_link(fk_movie=fk_movie, fk_person=fk_person, fk_role=fk_role))
         elif stdin == "update":
             print("update")
-            pk_role = input("pk_role :")
-            fk_movie = input("fk_movie :")
-            fk_person = input("fk_person :")
-            fk_role = input("fk_role :")
+            pk_role = int(input("pk_role :"))
+            fk_movie = int(input("fk_movie :"))
+            fk_person = int(input("fk_person :"))
+            fk_role = int(input("fk_role :"))
             print(update_link(pk_role, fk_movie, fk_person, fk_role))
         elif stdin == "delete":
             print("delete")
-            pk_role = input("pk_role :")
+            pk_role = int(input("pk_role :"))
             delete_link(pk_role)
 
     elif stdin == "roles":
         # search roles
-        print("Menu roles")
-        print(menu_crud)
-        stdin = ask()
-        if stdin == "create":
-            print("create")
-            name = input("name :")
-            insert_role(name)
-        elif stdin == "read":
-            print("read")
-            name = input("name :")
-            print(search_role(name=name))
-        elif stdin == "update":
-            print("update")
-            pk_role = input("pk_role :")
-            name = input("name :")
-            print(update_role(pk_role, name))
-        elif stdin == "delete":
-            print("delete")
-            pk_role = input("pk_role :")
-            delete_role(pk_role)
+        try:
+            print("Menu roles")
+            print(menu_crud)
+            stdin = ask()
+            if stdin == "create":
+                print("create")
+                name = input("name :")
+                insert_role(name)
+            elif stdin == "read":
+                print("read")
+                name = input("name :")
+                print(search_role(name=name))
+            elif stdin == "update":
+                print("update")
+                pk_role = int(input("pk_role :"))
+                name = input("name :")
+                print(update_role(pk_role, name))
+            elif stdin == "delete":
+                print("delete")
+                pk_role = int(input("pk_role :"))
+                delete_role(pk_role)
+        except:
+            print("EROOR: no role in the database.")
 
     elif stdin == "movie":
         # search one movie
@@ -130,25 +134,34 @@ def execute(stdin):
         if stdin == "create":
             print("create")
             title = input("title :")
-            duration = input("duration :")
-            date = input("date :")
+            duration = int(input("duration :"))
+            day = int(input("day (1 or 2 number(s)) :"))
+            month = int(input("month (1 or 2 number(s)) :"))
+            year = int(input("year (4 numbers) :"))
+            date = datetime.date(year, month, day)
             insert_movie(title, duration, date)
         elif stdin == "read":
             print("read")
             title = input("title :")
-            duration = input("duration :")
-            date = input("date :")
+            duration = int(input("duration :"))
+            day = int(input("day (1 or 2 number(s)) :"))
+            month = int(input("month (1 or 2 number(s)) :"))
+            year = int(input("year (4 numbers) :"))
+            date = datetime.date(year, month, day)
             print(search_movie(title=title, duration=duration, date=date))
         elif stdin == "update":
             print("update")
-            pk_movie = input("pk_movie :")
+            pk_movie = int(input("pk_movie :"))
             title = input("title :")
-            duration = input("duration :")
-            date = input("date :")
+            duration = int(input("duration :"))
+            day = int(input("day (1 or 2 number(s)) :"))
+            month = int(input("month (1 or 2 number(s)) :"))
+            year = int(input("year (4 numbers) :"))
+            date = datetime.date(year, month, day)
             print(update_movie(pk_movie, title, duration, date))
         elif stdin == "delete":
             print("delete")
-            pk_movie = input("pk_movie :")
+            pk_movie = int(input("pk_movie :"))
             delete_movie(pk_movie)
 
     elif stdin == "person":
@@ -160,30 +173,39 @@ def execute(stdin):
             print("create")
             firstname = input("firstname :")
             lastname = input("lastname :")
-            birthdate = input("birthdate :")
-            gender = input("gender :")
-            insert_person(title, duration, birthdate, gender)
+            day = int(input("day (1 or 2 number(s)) :"))
+            month = int(input("month (1 or 2 number(s)) :"))
+            year = int(input("year (4 numbers) :"))
+            birthdate = datetime.date(year, month, day)
+            gender = input("gender (M/F) :")
+            insert_person(firstname, lastname, birthdate, gender)
         elif stdin == "read":
             print("read")
             firstname = input("firtsname :")
             lastname = input("lastname :")
-            birthdate = input("birthdate :")
-            gender = input("gender :")
+            day = int(input("day (1 or 2 number(s)) :"))
+            month = int(input("month (1 or 2 number(s)) :"))
+            year = int(input("year (4 numbers) :"))
+            birthdate = datetime.date(year, month, day)
+            gender = input("gender (M/F) :")
             print(search_person(firstname=firstname, lastname=lastname, birthdate=birthdate, gender=gender))
         elif stdin == "update":
             print("update")
-            pk_person = input("pk_person :")
+            pk_person = int(input("pk_person :"))
             firstname = input("firstname :")
             lastname = input("lastname :")
-            birthdate = input("birthdate :")
-            gender = input("gendpk_movieer :")
+            day = int(input("day (1 or 2 number(s)) :"))
+            month = int(input("month (1 or 2 number(s)) :"))
+            year = int(input("year (4 numbers) :"))
+            birthdate = datetime.date(year, month, day)
+            gender = input("gender (M/F) :")
             print(update_person(pk_person, firstname, lastname, birthdate, gender))
         elif stdin == "delete":
             print("delete")
-            pk_person = input("pk_person :")
+            pk_person = int(input("pk_person :"))
             delete_person(pk_person)
 
-    elif stdin == "test":
+    elif stdin == "fill":
         # test the db
         print("test database ...")
         populate()
