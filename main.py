@@ -61,6 +61,7 @@ def execute(stdin):
         # search movies
         print("Menu movies")
         links = search_link()
+        print(links)
         for l in links:
             l[0] = search_movie(fk_movie=l[0])
             l[1] = search_person(fk_person=l[1])
@@ -76,24 +77,24 @@ def execute(stdin):
             fk_movie = input("fk_movie :")
             fk_person = input("fk_person :")
             fk_role = input("fk_role :")
-            insert_role(fk_movie, fk_person, fk_role)
+            insert_link(fk_movie, fk_person, fk_role)
         elif stdin == "read":
             print("read")
             fk_movie = input("fk_movie :")
             fk_person = input("fk_person :")
             fk_role = input("fk_role :")
-            print(search_role(fk_movie=fk_movie, fk_person=fk_person, fk_role=fk_role))
+            print(search_link(fk_movie=fk_movie, fk_person=fk_person, fk_role=fk_role))
         elif stdin == "update":
             print("update")
             pk_role = input("pk_role :")
             fk_movie = input("fk_movie :")
             fk_person = input("fk_person :")
             fk_role = input("fk_role :")
-            print(update_role(pk_role, fk_movie, fk_person, fk_role))
+            print(update_link(pk_role, fk_movie, fk_person, fk_role))
         elif stdin == "delete":
             print("delete")
             pk_role = input("pk_role :")
-            delete_role(pk_role)
+            delete_link(pk_role)
 
     elif stdin == "roles":
         # search roles
@@ -158,14 +159,14 @@ def execute(stdin):
             lastname = input("lastname :")
             birthdate = input("birthdate :")
             gender = input("gender :")
-            insert_role(title, duration, birthdate, gender)
+            insert_person(title, duration, birthdate, gender)
         elif stdin == "read":
             print("read")
             firstname = input("firtsname :")
             lastname = input("lastname :")
             birthdate = input("birthdate :")
             gender = input("gender :")
-            print(search_role(firstname=firstname, lastname=lastname, birthdate=birthdate, gender=gender))
+            print(search_person(firstname=firstname, lastname=lastname, birthdate=birthdate, gender=gender))
         elif stdin == "update":
             print("update")
             pk_person = input("pk_person :")
@@ -173,11 +174,11 @@ def execute(stdin):
             lastname = input("lastname :")
             birthdate = input("birthdate :")
             gender = input("gendpk_movieer :")
-            print(update_role(pk_person, firstname, lastname, birthdate, gender))
+            print(update_person(pk_person, firstname, lastname, birthdate, gender))
         elif stdin == "delete":
             print("delete")
             pk_person = input("pk_person :")
-            delete_role(pk_person)
+            delete_person(pk_person)
 
     elif stdin == "drop":
         # drop he database
